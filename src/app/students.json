@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "Abduvali",
+    "username": "abduvali",
+    "password": "22333",
+    "image": "Abduvali.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  },
+  {
+    "id": 2,
+    "name": "Muhammadaziz",
+    "username": "muhammadaziz",
+    "password": "44556",
+    "image": "Muhammadaziz.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  },
+  {
+    "id": 3,
+    "name": "Azizbek",
+    "username": "azizbek",
+    "password": "99000",
+    "image": "Azizbek.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  },
+  {
+    "id": 4,
+    "name": "Sanjarbek",
+    "username": "sanjarbek",
+    "password": "12123",
+    "image": "Sanjarbek.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  },
+  {
+    "id": 5,
+    "name": "Muhammadsolih",
+    "username": "muhammadsolih",
+    "password": "68686",
+    "image": "Muhammadsolih.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  },
+  {
+    "id": 6,
+    "name": "Ibrohimjon",
+    "username": "ibrohimjon",
+    "password": "57575",
+    "image": "Ibrohimjon.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  },
+  {
+    "id": 7,
+    "name": "Elnurbek",
+    "username": "elnurbek",
+    "password": "50525",
+    "image": "Elnurbek.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  },
+  {
+    "id": 8,
+    "name": "Abdulloh",
+    "username": "abdulloh",
+    "password": "94103",
+    "image": "Abdulloh.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  },
+  {
+    "id": 9,
+    "name": "Yahyobek",
+    "username": "yahyobek",
+    "password": "81818",
+    "image": "Yahyobek.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  },
+  {
+    "id": 10,
+    "name": "Zinnura",
+    "username": "zinnura",
+    "password": "77777",
+    "image": "Zinnuraxon.jpg",
+    "level": "OK",
+    "months": {
+      "2025-10": { "davomat": 0, "uy_vazifa": 0, "tasks": 0, "jarima": 0 }
+    }
+  }
+]
