@@ -1,100 +1,98 @@
-<div class="shop-container">
-  <!-- Header Section -->
-  <header class="cinematic-header">
-    <div class="header-glow"></div>
-    <h1 class="shop-title">
-      <span class="title-main">Do'kon</span>
-      <!-- <span class="title-sub">O'quvchilar Uchun Maxsus</span> -->
-    </h1>
-    <div class="header-particles">
-      <div class="particle" *ngFor="let particle of particles"></div>
+<div class="shop-container" [class.dark-theme]="isDarkMode">
+  <header class="shop-header">
+    <div class="header-content">
+      <h1 class="shop-title">
+        <span class="title-main">Do'kon</span>
+        <span class="title-sub">*platformaning bu qismi to'lig tugallanmagan!</span>
+      </h1>
+      <div class="currency-display">
+        <div class="aqcha-balance">
+          <img src="aqcha.png" alt="AQCHA" class="aqcha-icon-large"/>
+          <span class="balance">{{ currentStudent?.name }}</span>
+          <span class="balance">{{ currentStudent?.aqcha || 0 }}</span>
+        </div>
+      </div>
     </div>
+    <div class="header-glow"></div>
   </header>
 
-  <!-- Student Stats Card -->
-  <section class="stats-card">
-    <div class="stats-content">
-      <div class="stat-item">
-        <div class="stat-icon">
-          <i class="fas fa-user-graduate"></i>
+  <!-- Compact Products Grid -->
+  <section class="products-section">
+    <div class="products-grid">
+      <div 
+        class="product-card" 
+        *ngFor="let product of products; let i = index"
+        [class.can-buy]="currentStudent?.aqcha >= product.price"
+        [class.cannot-buy]="currentStudent?.aqcha < product.price"
+      >
+        <div class="card-inner">
+          <div class="product-image-section">
+            <img 
+              [src]="product.image" 
+              [alt]="product.name" 
+              class="product-image" 
+              (error)="handleImageError($event, product)"
+            />
+            <div class="product-badge" *ngIf="product.price <= 2">
+              <span>Tejash</span>
+            </div>
+          </div>
+          
+          <div class="product-details">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+            
+            <div class="purchase-section">
+              <div class="price-tag">
+                <img src="aqcha.png" alt="AQCHA" class="aqcha-icon-small"/>
+                <span class="price">{{ product.price }}</span>
+              </div>
+              
+              <button
+                class="buy-button"
+                (click)="buyProduct(product)"
+                [disabled]="currentStudent?.aqcha < product.price"
+              >
+                <div class="button-content">
+                  <span class="button-text">
+                    {{ currentStudent?.aqcha < product.price ? 'Aqcha yetarli emas' : 'Xarid qilish' }}
+                  </span>
+                  <span class="button-icon">
+                    <i class="fas" [class.fa-lock]="currentStudent?.aqcha < product.price" [class.fa-shopping-bag]="currentStudent?.aqcha >= product.price"></i>
+                  </span>
+                </div>
+                <div class="progress-ring" *ngIf="currentStudent?.aqcha >= product.price">
+                  <svg width="40" height="40">
+                    <circle class="progress-ring-circle" cx="20" cy="20" r="18"></circle>
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="stat-info">
-          <span class="stat-label">Ism</span>
-          <span class="stat-value">{{ currentStudent?.name || 'Noma\'lum' }}</span>
-        </div>
+        
+        <div class="card-glow"></div>
       </div>
-      <div class="stat-item">
-        <div class="stat-icon diamond">
-          <i class="fas fa-gem"></i>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">Diamonds</span>
-          <span class="stat-value diamond-count">{{ currentStudent?.diamonds || 0 }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="stats-glow"></div>
-  </section>
-
-  <!-- Products Grid -->
-  <section class="products-grid">
-    <div 
-      class="product-card" 
-      *ngFor="let product of products; let i = index"
-      [style.animation-delay]="i * 0.3 + 's'"
-    >
-      <div class="card-glow"></div>
-      <div class="product-image-container">
-        <img 
-          [src]="product.image" 
-          [alt]="product.name" 
-          class="product-image"
-          loading="lazy"
-        />
-        <div class="image-shine"></div>
-        <div class="price-tag">
-          <span class="price">{{ product.price }}</span>
-          <i class="fas fa-gem"></i>
-        </div>
-      </div>
-      <div class="product-content">
-        <h3 class="product-name">{{ product.name }}</h3>
-        <p class="product-description">{{ product.description }}</p>
-        <button
-          class="buy-btn"
-          (click)="buyProduct(product)"
-          [disabled]="currentStudent?.diamonds < product.price"
-          [class.insufficient]="currentStudent?.diamonds < product.price"
-          [attr.aria-label]="currentStudent?.diamonds < product.price ? 'Diamonds yetarli emas' : 'Xarid qilish'"
-        >
-          <span class="btn-glow"></span>
-          <span class="btn-text">
-            {{ currentStudent?.diamonds < product.price ? 'Diamonds yetarli emas' : 'Xarid qilish' }}
-          </span>
-          <i class="fas fa-bolt"></i>
-        </button>
-      </div>
-      <div class="hover-border"></div>
     </div>
   </section>
 
-  <!-- Message Toast -->
+  <!-- Enhanced Toast -->
   <div 
     class="message-toast" 
     *ngIf="message"
+    [class.show]="message"
     [class.success]="message.includes('xarid qildingiz')"
     [class.error]="!message.includes('xarid qildingiz')"
-    role="alert"
   >
     <div class="toast-content">
-      <i class="fas" [class.fa-check]="message.includes('xarid qildingiz')" [class.fa-exclamation]="!message.includes('xarid qildingiz')"></i>
+      <i class="fas" [class.fa-check-circle]="message.includes('xarid qildingiz')" [class.fa-exclamation-triangle]="!message.includes('xarid qildingiz')"></i>
       <span>{{ message }}</span>
     </div>
     <div class="toast-progress"></div>
   </div>
 
-  <!-- Background Animation -->
-  <div class="background-animation">
-    <div class="floating-dot" *ngFor="let dot of floatingDots"></div>
+
+  <div class="background-elements">
+    <div class="floating-item" *ngFor="let item of floatingItems"></div>
   </div>
 </div>
