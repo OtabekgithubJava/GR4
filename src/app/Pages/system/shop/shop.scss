@@ -1,0 +1,526 @@
+$primary-color: #1e40af; // Deepened blue for professionalism
+$secondary-color: #4b5563; // Neutral gray
+$accent-color: #7c3aed; // Vibrant purple for highlights
+$background-light: #f1f5f9; // Softer background
+$text-light: #111827; // Darker text for contrast
+$card-light: #ffffff;
+$border-light: #d1d5db;
+$header-light: #e5e7eb;
+$success-color: #059669; // Modern green
+$warning-color: #d97706; // Warm amber
+$danger-color: #dc2626; // Bright red
+$info-color: #2563eb; // Blue for info
+
+// Animations
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-150%) rotate(45deg); }
+  100% { transform: translateX(250%) rotate(45deg); }
+}
+
+@keyframes particleFloat {
+  0% { transform: translate(0, 0) scale(0); opacity: 0; }
+  10% { opacity: 0.8; transform: scale(1); }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+
+@keyframes dotMovement {
+  0%, 100% { transform: translate(var(--start-x), var(--start-y)) scale(0.7); opacity: 0.2; }
+  25% { transform: translate(var(--mid1-x), var(--mid1-y)) scale(1.1); opacity: 0.5; }
+  50% { transform: translate(var(--mid2-x), var(--mid2-y)) scale(0.9); opacity: 0.7; }
+  75% { transform: translate(var(--mid3-x), var(--mid3-y)) scale(1); opacity: 0.4; }
+}
+
+@keyframes toastProgress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+// Main Container
+.shop-container {
+  min-height: 100vh;
+  background: linear-gradient(145deg, $background-light, darken($background-light, 5%));
+  padding: 3rem 1.5rem;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif; // Clean, professional font
+}
+
+// Header
+.cinematic-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+
+  .header-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba($primary-color, 0.2), transparent 70%);
+    animation: glow 5s ease-in-out infinite;
+    filter: blur(30px);
+    z-index: 0;
+  }
+
+  .shop-title {
+    position: relative;
+    z-index: 1;
+
+    .title-main {
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, $primary-color, $accent-color);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 4px 12px rgba($primary-color, 0.3);
+      letter-spacing: 1.5px;
+    }
+
+    .title-sub {
+      font-size: 1.2rem;
+      color: $secondary-color;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
+    }
+  }
+
+  .header-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    .particle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: $accent-color;
+      border-radius: 50%;
+      animation: particleFloat 10s linear infinite;
+      box-shadow: 0 0 8px rgba($accent-color, 0.6);
+
+      @for $i from 1 through 20 {
+        &:nth-child(#{$i}) {
+          --tx: #{random(200) - 100}px;
+          --ty: #{random(200) - 100}px;
+          left: #{random(100)};
+          top: #{random(100)};
+          animation-delay: #{random(10)}s;
+          width: #{random(3) + 3}px;
+          height: #{random(3) + 3}px;
+        }
+      }
+    }
+  }
+}
+
+// Stats Card
+.stats-card {
+  background: $card-light;
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin: 0 auto 3rem;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: slideIn 1s ease-out;
+  border: 1px solid $border-light;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba($primary-color, 0.15);
+  }
+
+  .stats-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        background: $primary-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.3rem;
+        box-shadow: 0 5px 15px rgba($primary-color, 0.3);
+
+        &.diamond {
+          background: $warning-color;
+          animation: float 5s ease-in-out infinite;
+        }
+      }
+
+      .stat-info {
+        .stat-label {
+          margin-right: 20px;
+          font-size: 0.9rem;
+          color: $secondary-color;
+          font-weight: 600;
+          margin-bottom: 0.5rem; // Added spacing below label
+        }
+
+        .stat-value {
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: $text-light;
+
+          &.diamond-count {
+            color: $primary-color;
+            font-weight: 800;
+          }
+        }
+      }
+    }
+  }
+
+  .stats-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, $primary-color, $accent-color);
+    border-radius: 22px;
+    opacity: 0;
+    filter: blur(12px);
+    transition: opacity 0.4s ease;
+    z-index: -1;
+  }
+
+  &:hover .stats-glow {
+    opacity: 0.3;
+  }
+}
+
+// Products Grid
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 cards per row
+  gap: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr); // 2 cards per row on medium screens
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; // 1 card per row on small screens
+  }
+}
+
+// Product Card
+.product-card {
+  background: $card-light;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  animation: slideIn 0.8s ease-out;
+  border: 1px solid $border-light;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba($primary-color, 0.2);
+
+    .card-glow {
+      opacity: 0.4;
+    }
+
+    .hover-border {
+      opacity: 0.8;
+    }
+
+    .product-image {
+      transform: scale(1.05);
+    }
+
+    .image-shine {
+      transform: translateX(250%) rotate(45deg);
+    }
+  }
+
+  .card-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, $primary-color, $accent-color);
+    border-radius: 22px;
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 0.5s ease;
+    z-index: -1;
+  }
+
+  .product-image-container {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .image-shine {
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: transform 0.8s ease;
+    }
+
+    .price-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, $primary-color, $accent-color);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 5px 15px rgba($primary-color, 0.3);
+    }
+  }
+
+  .product-content {
+    padding: 1.5rem;
+
+    .product-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: $text-light;
+      margin-bottom: 0.75rem;
+    }
+
+    .product-description {
+      color: $secondary-color;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      min-height: 60px;
+    }
+
+    .buy-btn {
+      width: 100%;
+      background: linear-gradient(135deg, $primary-color, $accent-color);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba($primary-color, 0.4);
+
+        .btn-glow {
+          transform: translateX(250%) rotate(45deg);
+        }
+      }
+
+      &:disabled, &.insufficient {
+        background: $secondary-color;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+
+      .btn-glow {
+        position: absolute;
+        top: -50%;
+        left: -150%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: transform 0.6s ease;
+      }
+
+      .btn-text {
+        position: relative;
+        z-index: 1;
+      }
+
+      .fa-bolt {
+        z-index: 1;
+        animation: float 4s ease-in-out infinite;
+      }
+    }
+  }
+
+  .hover-border {
+    position: absolute;
+    inset: 0;
+    border: 2px solid $accent-color;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+}
+
+// Message Toast
+.message-toast {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: $success-color;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 1000;
+
+  &.show {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  &.error {
+    background: $danger-color;
+  }
+
+  .toast-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    i {
+      font-size: 1.2rem;
+    }
+
+    span {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  }
+
+  .toast-progress {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: white;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: toastProgress 3s linear forwards;
+    }
+  }
+}
+
+// Background Animation
+.background-animation {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+
+  .floating-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, $primary-color, transparent);
+    border-radius: 50%;
+    animation: dotMovement 12s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba($primary-color, 0.4);
+
+    @for $i from 1 through 30 {
+      &:nth-child(#{$i}) {
+        --start-x: #{random(80) - 40}vw;
+        --start-y: #{random(80) - 40}vh;
+        --mid1-x: #{random(80) - 40}vw;
+        --mid1-y: #{random(80) - 40}vh;
+        --mid2-x: #{random(80) - 40}vw;
+        --mid2-y: #{random(80) - 40}vh;
+        --mid3-x: #{random(80) - 40}vw;
+        --mid3-y: #{random(80) - 40}vh;
+        left: #{random(100)}vw;
+        top: #{random(100)}vh;
+        animation-delay: #{random(12)}s;
+        width: #{random(4) + 4}px;
+        height: #{random(4) + 4}px;
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .cinematic-header .shop-title .title-main {
+    font-size: 2.5rem;
+  }
+
+  .stats-card .stats-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .message-toast {
+    top: 1rem;
+    right: 1rem;
+    left: 1rem;
+    transform: translateY(-100%);
+
+    &.show {
+      transform: translateY(0);
+    }
+  }
+}

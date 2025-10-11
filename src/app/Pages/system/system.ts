@@ -11,6 +11,7 @@ interface Student {
   password: string;
   image: string; // Faqat image qoldi
   level: string;
+  diamonds: number; // yangi
   months: {
     [key: string]: {
       davomat: number;
@@ -43,8 +44,8 @@ export class System implements OnInit {
   menuItems: MenuItem[] = [
     { title: 'Bosh Sahifa', path: '/system/home', icon: 'fas fa-home' },
     { title: 'Reyting', path: '/system/rating', icon: 'fas fa-chart-line' },
-
     { title: 'Profil', path: '/system/profile', icon: 'fas fa-user' },
+    { title: 'Do\'kon', path: '/system/shop', icon: 'fas fa-store'}
     // Yangi menyu elementi
 
   ];
@@ -124,4 +125,55 @@ export class System implements OnInit {
     localStorage.removeItem('currentStudent');
     this.router.navigate(['/login']);
   }
+
+  calculateTotalXP(): number {
+  if (!this.currentStudent || !this.currentStudent.months) return 0;
+
+  let totalXP = 0;
+  for (const monthKey in this.currentStudent.months) {
+    if (this.currentStudent.months.hasOwnProperty(monthKey)) {
+      const monthData = this.currentStudent.months[monthKey];
+      totalXP += monthData.davomat + monthData.uy_vazifa + monthData.tasks - monthData.jarima;
+    }
+  }
+  return totalXP;
+}
+
+
+  convertXpToDiamonds(): void {
+  if (!this.currentStudent) return;
+  
+  const conversionRate = 1000;
+  const totalXP = this.calculateTotalXP();
+
+  if (totalXP >= conversionRate) {
+    const diamondsEarned = Math.floor(totalXP / conversionRate);
+    this.currentStudent.diamonds = (this.currentStudent.diamonds || 0) + diamondsEarned;
+
+    // Adjust XP: Here assuming XP reset after conversion, can be adapted
+    // If XP is stored differently, update accordingly.
+    this.resetOrAdjustXPAfterConversion();
+
+    // Save changes
+    localStorage.setItem('currentStudent', JSON.stringify(this.currentStudent));
+    
+    alert(`Successfully converted XP to ${diamondsEarned} diamonds!`);
+  } else {
+    alert('Not enough XP for conversion!');
+  }
+}
+
+// You may implement this method to clear or reduce student's XP after conversion
+private resetOrAdjustXPAfterConversion() {
+  // Example: reset all monthly XP-related fields
+  if (!this.currentStudent) return;
+  for (const month in this.currentStudent.months) {
+    this.currentStudent.months[month].tasks = 0;
+    this.currentStudent.months[month].uy_vazifa = 0;
+    this.currentStudent.months[month].davomat = 0;
+    this.currentStudent.months[month].jarima = 0;
+  }
+}
+
+
 }

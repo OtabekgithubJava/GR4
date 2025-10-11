@@ -5,6 +5,7 @@ export interface Student {
   password: string;
   image: string; // Faqat image qoldi, avatar olib tashlandi
   level: string;
+  diamonds: number; // yangi
   months: {
     [key: string]: {
       davomat: number;

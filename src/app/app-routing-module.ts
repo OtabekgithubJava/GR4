@@ -6,6 +6,7 @@ import { AuthGuard } from './Guards/auth.guard';
 import { Home } from './Pages/system/home/home';
 import { Rating } from './Pages/system/rating/rating';
 import { Profile } from './Pages/system/profile/profile';
+import { Shop } from './Pages/system/shop/shop';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'home', component: Home },
       { path: 'rating', component: Rating },
       { path: 'profile', component: Profile },
+      { path: 'shop', component: Shop},
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },
