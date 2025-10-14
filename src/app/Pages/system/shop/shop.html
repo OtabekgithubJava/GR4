@@ -1,98 +1,235 @@
 <div class="shop-container" [class.dark-theme]="isDarkMode">
+  <!-- Header -->
   <header class="shop-header">
     <div class="header-content">
-      <h1 class="shop-title">
-        <span class="title-main">Do'kon</span>
-        <span class="title-sub">*platformaning bu qismi to'lig tugallanmagan!</span>
-      </h1>
-      <div class="currency-display">
-        <div class="aqcha-balance">
-          <img src="aqcha.png" alt="AQCHA" class="aqcha-icon-large"/>
-          <span class="balance">{{ currentStudent?.name }}</span>
-          <span class="balance">{{ currentStudent?.aqcha || 0 }}</span>
+      <div class="brand-section">
+        <div class="brand">
+          <!-- <span class="brand-icon">🏪</span> -->
+          <div>
+            <h1 class="brand-name">Premium Do'kon</h1>
+            <p class="brand-tagline">Sifatli o'quv materiallari</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="search-section">
+        <div class="search-container">
+          <input 
+            type="text" 
+            placeholder="Mahsulot qidirish..." 
+            class="search-input"
+            (input)="onSearch($event)">
+          <button class="search-btn">🔍</button>
+        </div>
+      </div> -->
+
+      <div class="user-section">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img [src]="currentStudent?.image" alt="User">
+            <div class="online-indicator"></div>
+          </div>
+          <div class="user-details">
+            <span class="user-name">{{currentStudent?.name}}</span>
+            <div class="user-stats">
+              <span class="aqcha">{{currentStudent?.aqcha || 0}} AQCHA</span>
+              <span class="level">Level {{getLevel()}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="header-glow"></div>
+
+    <!-- Navigation -->
+    <nav class="category-nav">
+      <button 
+        class="category-btn" 
+        [class.active]="activeCategory === 'all'"
+        (click)="activeCategory = 'all'">
+        <span>📦 Barchasi</span>
+        <span class="count">{{products.length}}</span>
+      </button>
+      <button 
+        class="category-btn" 
+        [class.active]="activeCategory === 'books'"
+        (click)="activeCategory = 'books'">
+        <span>📚 Kitoblar</span>
+        <span class="count">{{getCategoryCount('books')}}</span>
+      </button>
+      <button 
+        class="category-btn" 
+        [class.active]="activeCategory === 'tools'"
+        (click)="activeCategory = 'tools'">
+        <span>🛠️ Asboblar</span>
+        <span class="count">{{getCategoryCount('tools')}}</span>
+      </button>
+      <button 
+        class="category-btn" 
+        [class.active]="activeCategory === 'premium'"
+        (click)="activeCategory = 'premium'">
+        <span>⭐ Premium</span>
+        <span class="count">{{getCategoryCount('premium')}}</span>
+      </button>
+    </nav>
   </header>
 
-  <!-- Compact Products Grid -->
-  <section class="products-section">
-    <div class="products-grid">
-      <div 
-        class="product-card" 
-        *ngFor="let product of products; let i = index"
-        [class.can-buy]="currentStudent?.aqcha >= product.price"
-        [class.cannot-buy]="currentStudent?.aqcha < product.price"
-      >
-        <div class="card-inner">
-          <div class="product-image-section">
+  <!-- Main Content -->
+  <main class="shop-main">
+    <!-- Stats Overview -->
+    <section class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <img src="aqcha.png" alt="AQCHA" class="stat-icon">
+          <div class="stat-info">
+            <span class="stat-value">{{getTotalSpent()}} AQCHA</span>
+            <span class="stat-label">Jami sarflangan</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🛍️</div>
+          <div class="stat-info">
+            <span class="stat-value">{{getItemsBought()}}</span>
+            <span class="stat-label">Sotib olingan</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏅</div>
+          <div class="stat-info">
+            <span class="stat-value">#{{getPlayerRank()}}</span>
+            <span class="stat-label">Reyting</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+      <div class="section-header">
+        <h2 class="section-title">Mahsulotlar</h2>
+        <div class="section-controls">
+          <div class="sort-controls">
+            <button 
+              class="sort-btn" 
+              [class.active]="sortBy === 'name'"
+              (click)="sortProducts('name')">
+              Alfabet
+            </button>
+            <button 
+              class="sort-btn" 
+              [class.active]="sortBy === 'price'"
+              (click)="sortProducts('price')">
+              Narx
+            </button>
+          </div>
+          <div class="view-toggle">
+            <button 
+              class="view-btn" 
+              [class.active]="viewMode === 'grid'"
+              (click)="viewMode = 'grid'">
+              ◼️
+            </button>
+            <button 
+              class="view-btn" 
+              [class.active]="viewMode === 'list'"
+              (click)="viewMode = 'list'">
+              ☰
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" [class.list-view]="viewMode === 'list'">
+        <div 
+          class="product-card" 
+          *ngFor="let product of getFilteredProducts()"
+          [class.can-afford]="canAfford(product)"
+          [class.featured]="product.featured">
+          
+          <!-- Product Image -->
+          <div class="product-image">
             <img 
               [src]="product.image" 
-              [alt]="product.name" 
-              class="product-image" 
-              (error)="handleImageError($event, product)"
-            />
-            <div class="product-badge" *ngIf="product.price <= 2">
-              <span>Tejash</span>
+              [alt]="product.name"
+              (error)="handleImageError($event, product)">
+            <div class="product-badges">
+              <span class="badge rarity" [class]="product.rarity">
+                {{getRarityText(product.rarity)}}
+              </span>
+              <span class="badge featured" *ngIf="product.featured">⭐</span>
+              <span class="badge discount" *ngIf="product.originalPrice">
+                -{{calculateDiscount(product)}}%
+              </span>
             </div>
           </div>
-          
-          <div class="product-details">
-            <h3 class="product-name">{{ product.name }}</h3>
-            <p class="product-description">{{ product.description }}</p>
+
+          <!-- Product Info -->
+          <div class="product-info">
+            <div class="product-header">
+              <h3 class="product-name">{{product.name}}</h3>
+              <span class="product-category">{{product.category}}</span>
+            </div>
             
-            <div class="purchase-section">
-              <div class="price-tag">
-                <img src="aqcha.png" alt="AQCHA" class="aqcha-icon-small"/>
-                <span class="price">{{ product.price }}</span>
+            <p class="product-description">{{product.description}}</p>
+            
+            <div class="product-meta">
+              <div class="meta-item" *ngIf="product.rating">
+                <span>⭐ {{product.rating}}</span>
+                <span>({{product.reviewCount}})</span>
+              </div>
+              <div class="meta-item" *ngIf="product.xpBonus">
+                <span>+{{product.xpBonus}} XP</span>
+              </div>
+            </div>
+
+            <!-- Price and Action -->
+            <div class="product-footer">
+              <div class="price">
+                <span class="current-price">
+                  <img src="aqcha.png" alt="AQCHA" class="currency-icon">
+                  {{product.price}}
+                </span>
+                <span class="original-price" *ngIf="product.originalPrice">
+                  {{product.originalPrice}}
+                </span>
               </div>
               
-              <button
-                class="buy-button"
+              <button 
+                class="buy-btn" 
                 (click)="buyProduct(product)"
-                [disabled]="currentStudent?.aqcha < product.price"
-              >
-                <div class="button-content">
-                  <span class="button-text">
-                    {{ currentStudent?.aqcha < product.price ? 'Aqcha yetarli emas' : 'Xarid qilish' }}
-                  </span>
-                  <span class="button-icon">
-                    <i class="fas" [class.fa-lock]="currentStudent?.aqcha < product.price" [class.fa-shopping-bag]="currentStudent?.aqcha >= product.price"></i>
-                  </span>
-                </div>
-                <div class="progress-ring" *ngIf="currentStudent?.aqcha >= product.price">
-                  <svg width="40" height="40">
-                    <circle class="progress-ring-circle" cx="20" cy="20" r="18"></circle>
-                  </svg>
-                </div>
+                [disabled]="!canAfford(product)"
+                [class.affordable]="canAfford(product)">
+                {{canAfford(product) ? 'Sotib olish' : 'Aqcha yetarli emas'}}
               </button>
             </div>
           </div>
         </div>
-        
-        <div class="card-glow"></div>
       </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="getFilteredProducts().length === 0">
+        <div class="empty-icon">📦</div>
+        <h3>Mahsulot topilmadi</h3>
+        <p>Qidiruv shartlaringizga mos mahsulot topilmadi</p>
+        <button class="clear-filters" (click)="clearFilters()">
+          Filtrlarni tozalash
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container">
+    <div 
+      class="toast" 
+      *ngFor="let toast of toasts" 
+      [class]="toast.type">
+      <span class="toast-icon">{{getToastIcon(toast.type)}}</span>
+      <div class="toast-content">
+        <strong>{{toast.title}}</strong>
+        <p>{{toast.message}}</p>
+      </div>
+      <button class="toast-close" (click)="removeToast(toast.id)">×</button>
     </div>
-  </section>
-
-  <!-- Enhanced Toast -->
-  <div 
-    class="message-toast" 
-    *ngIf="message"
-    [class.show]="message"
-    [class.success]="message.includes('xarid qildingiz')"
-    [class.error]="!message.includes('xarid qildingiz')"
-  >
-    <div class="toast-content">
-      <i class="fas" [class.fa-check-circle]="message.includes('xarid qildingiz')" [class.fa-exclamation-triangle]="!message.includes('xarid qildingiz')"></i>
-      <span>{{ message }}</span>
-    </div>
-    <div class="toast-progress"></div>
-  </div>
-
-
-  <div class="background-elements">
-    <div class="floating-item" *ngFor="let item of floatingItems"></div>
   </div>
 </div>
