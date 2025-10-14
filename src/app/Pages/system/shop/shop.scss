@@ -1128,3 +1128,261 @@
     }
   }
 }
+
+
+
+/* Mobile First Responsive Design */
+@media (max-width: 1200px) {
+  .shop-main {
+    padding: 1.5rem;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .brand {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .search-section {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .user-section {
+    width: 100%;
+    
+    .user-info {
+      justify-content: center;
+    }
+  }
+  
+  .category-nav {
+    padding: 0 1rem 1rem;
+    gap: 0.5rem;
+    
+    .category-btn {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+  
+  .shop-main {
+    padding: 1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    padding: 1.25rem;
+    
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+    }
+    
+    .stat-value {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .section-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 640px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .product-card.list-view {
+    flex-direction: column;
+    
+    .product-image {
+      width: 100%;
+      height: 200px;
+    }
+  }
+  
+  .product-info {
+    padding: 1.25rem;
+  }
+  
+  .product-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    
+    .buy-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  
+  .sort-controls {
+    flex-wrap: wrap;
+  }
+  
+  .user-info {
+    .user-stats {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .category-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    
+    .category-btn {
+      flex-shrink: 0;
+      padding: 0.625rem 0.875rem;
+      font-size: 0.8rem;
+      
+      .count {
+        padding: 0.125rem 0.5rem;
+        font-size: 0.7rem;
+      }
+    }
+  }
+  
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  
+  .product-card {
+    border-radius: 20px;
+    
+    .product-info {
+      padding: 1rem;
+    }
+    
+    .product-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    
+    .product-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  
+  .toast-container {
+    left: 0.5rem;
+    right: 0.5rem;
+    
+    .toast {
+      max-width: none;
+      padding: 1rem;
+    }
+  }
+}
+
+/* Tablet Landscape Optimization */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .header-content {
+    gap: 1rem;
+  }
+  
+  .search-section {
+    max-width: 400px;
+  }
+}
+
+/* Large Desktop Optimization */
+@media (min-width: 1440px) {
+  .shop-main {
+    max-width: 1400px;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .product-card:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+  }
+  
+  .category-btn:hover {
+    transform: none;
+  }
+  
+  .buy-btn:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  /* Increase tap targets for mobile */
+  .buy-btn,
+  .category-btn,
+  .sort-btn,
+  .view-btn {
+    min-height: 44px;
+  }
+}
+
+/* High DPI Screen Optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .product-image img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+
+@media print {
+  .category-nav,
+  .section-controls,
+  .buy-btn {
+    display: none;
+  }
+  
+  .shop-container {
+    background: white;
+    color: black;
+  }
+  
+  .product-card {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+  }
+}
