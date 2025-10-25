@@ -29,7 +29,7 @@
     "image": "Azizbek.jpg",
     "level": "OK",
     "months": {
-      "2025-10": { "davomat": 70, "uy_vazifa": 30, "tasks": 116, "jarima": 20 }
+      "2025-10": { "davomat": 70, "uy_vazifa": 30, "tasks": 116, "jarima": 40 }
     }
   },
   {
@@ -95,7 +95,7 @@
     "image": "Yahyobek.jpg",
     "level": "OK",
     "months": {
-      "2025-10": { "davomat": 30, "uy_vazifa": 30, "tasks": 0, "jarima": 90 }
+      "2025-10": { "davomat": 30, "uy_vazifa": 30, "tasks": 100, "jarima": 90 }
     }
   },
   {
@@ -106,7 +106,7 @@
     "image": "Zinnuraxon.jpg",
     "level": "OK",
     "months": {
-      "2025-10": { "davomat": 50, "uy_vazifa": 30, "tasks": 120, "jarima": 70 }
+      "2025-10": { "davomat": 50, "uy_vazifa": 30, "tasks": 220, "jarima": 70 }
     }
   }
 ]
