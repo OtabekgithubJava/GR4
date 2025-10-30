@@ -51,7 +51,7 @@
     "image": "Muhammadsolih.jpg",
     "level": "OK",
     "months": {
-      "2025-10": { "davomat": 60, "uy_vazifa": 20, "tasks": 114, "jarima": 390 }
+      "2025-10": { "davomat": 60, "uy_vazifa": 20, "tasks": 114, "jarima": 400 }
     }
   },
   {
@@ -62,7 +62,7 @@
     "image": "Ibrohimjon.jpg",
     "level": "OK",
     "months": {
-      "2025-10": { "davomat": 90, "uy_vazifa": 30, "tasks": 331, "jarima": 150 }
+      "2025-10": { "davomat": 90, "uy_vazifa": 30, "tasks": 381, "jarima": 150 }
     }
   },
   {
@@ -84,7 +84,7 @@
     "image": "Abdulloh.jpg",
     "level": "OK",
     "months": {
-      "2025-10": { "davomat": 80, "uy_vazifa": 30, "tasks": 29, "jarima": 340 }
+      "2025-10": { "davomat": 80, "uy_vazifa": 30, "tasks": 29, "jarima": 350 }
     }
   },
   {
@@ -106,7 +106,7 @@
     "image": "Zinnuraxon.jpg",
     "level": "OK",
     "months": {
-      "2025-10": { "davomat": 70, "uy_vazifa": 30, "tasks": 255, "jarima": 280 }
+      "2025-10": { "davomat": 70, "uy_vazifa": 30, "tasks": 305, "jarima": 280 }
     }
   }
 ]
