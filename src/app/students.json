@@ -62,7 +62,7 @@
     "image": "Ibrohimjon.jpg",
     "level": "OK",
     "months": {
-      "2025-10": { "davomat": 90, "uy_vazifa": 30, "tasks": 481, "jarima": 150 }
+      "2025-10": { "davomat": 90, "uy_vazifa": 30, "tasks": 481, "jarima": 250 }
     }
   },
   {
@@ -106,7 +106,7 @@
     "image": "Zinnuraxon.jpg",
     "level": "OK",
     "months": {
-      "2025-10": { "davomat": 70, "uy_vazifa": 30, "tasks": 405, "jarima": 280 }
+      "2025-10": { "davomat": 70, "uy_vazifa": 30, "tasks": 405, "jarima": 380 }
     }
   }
 ]
