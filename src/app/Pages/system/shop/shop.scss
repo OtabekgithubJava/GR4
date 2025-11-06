@@ -1,5 +1,5 @@
 /* ──────────────────────────────────────
-   Colors & Dark theme
+   1. Colors & Dark theme
    ────────────────────────────────────── */
 $primary:   #2563eb;
 $secondary: #6b7280;
@@ -17,11 +17,23 @@ $danger:    #ef4444;
 }
 
 /* ──────────────────────────────────────
-   Base container – Mobile-first
+   2. ROOT – BLOCK ALL HORIZONTAL SCROLL
+   ────────────────────────────────────── */
+html, body, .shop-container {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ──────────────────────────────────────
+   3. Shop container
    ────────────────────────────────────── */
 .shop-container {
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw;
   margin: 0 auto;
   padding: 0.75rem;
   background: var(--bg);
@@ -30,47 +42,48 @@ $danger:    #ef4444;
   font-family: system-ui, sans-serif;
   box-sizing: border-box;
   overflow-x: hidden;
-  touch-action: pan-y; /* Prevents accidental horizontal scroll */
+  touch-action: pan-y;
 }
 
 /* ──────────────────────────────────────
-   Header – Mobile-friendly
+   4. Header – LEFT-ALIGNED on mobile
    ────────────────────────────────────── */
 .header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
   margin-bottom: 1.5rem;
-  text-align: center;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
 }
 
 .user-info {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 3px solid $primary;
+  border: 2px solid $primary;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .user-details {
   .name {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
   }
   .aqcha-balance {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    font-size: 0.9rem;
+    gap: 0.75rem;
+    font-size: 0.85rem;
     .aqcha { color: $warning; font-weight: 700; }
     .level { color: $primary; font-weight: 600; }
   }
@@ -82,32 +95,40 @@ $danger:    #ef4444;
   border-radius: 8px;
   padding: 0.5rem;
   cursor: pointer;
-  font-size: 1.3rem;
-  transition: background 0.2s;
+  font-size: 1.2rem;
+  flex-shrink: 0;
   &:hover { background: var(--hover); }
 }
 
 /* ──────────────────────────────────────
-   Product Card – Mobile-first scaling
+   5. Product Card
    ────────────────────────────────────── */
 .product-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  transition: all 0.2s;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  &:hover { border-color: $primary; transform: translateY(-3px); }
+  transition: all .2s;
+  flex-shrink: 0;
+  &:hover {
+    border-color: $primary;
+    transform: translateY(-3px);
+  }
 }
 
 .product-image {
   position: relative;
   height: 130px;
-  img { width: 100%; height: 100%; object-fit: cover; }
+  img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .rarity-badge {
-    position: absolute; top: 0.4rem; left: 0.4rem;
-    padding: 0.2rem 0.6rem; border-radius: 16px;
-    font-size: 0.65rem; font-weight: 700; color: #fff;
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 16px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #fff;
     &.common    { background: $secondary; }
     &.rare      { background: $primary; }
     &.epic      { background: $accent; }
@@ -118,77 +139,122 @@ $danger:    #ef4444;
 
 .product-info {
   padding: 0.8rem;
-  .product-name { margin: 0 0 0.4rem; font-size: 0.95rem; font-weight: 600; }
-  .product-desc { margin: 0 0 0.6rem; font-size: 0.75rem; color: #94a3b8; line-height: 1.35; }
+  .product-name {
+    margin: 0 0 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .product-desc {
+    margin: 0 0 0.6rem;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
   .product-meta {
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
     .price { font-size: 1.1rem; font-weight: 700; color: $success; }
-    .xp { font-size: 0.75rem; color: $warning; font-weight: 600; }
+    .xp    { font-size: 0.75rem; color: $warning; font-weight: 600; }
   }
 }
 
 .buy-btn {
-  width: 100%; padding: 0.7rem; border: none; border-radius: 8px;
-  font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s;
-  &.can-buy { background: $success; color: #fff; &:hover { background: darken($success,10%); } }
-  &.cannot-buy { background: $danger; color: #fff; cursor: not-allowed; opacity: 0.7; }
-  &:disabled { cursor: not-allowed; }
+  width: 100%;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all .2s;
+  &.can-buy   { background: $success; color: #fff; &:hover { background: darken($success,10%); } }
+  &.cannot-buy{ background: $danger;  color: #fff; cursor: not-allowed; opacity: .7; }
 }
 
 /* ──────────────────────────────────────
-   Toast
+   6. Toast
    ────────────────────────────────────── */
 .toast {
-  position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%);
-  padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; z-index: 1000;
-  font-size: 0.9rem; min-width: 200px; text-align: center;
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 1000;
+  font-size: 0.9rem;
+  max-width: 90vw;
+  text-align: center;
   &.success { background: $success; color: #fff; }
   &.error   { background: $danger;   color: #fff; }
 }
 
 /* ──────────────────────────────────────
-   Category sections & Swipe Carousel
+   7. Category & Carousel – 1 + ½ CARD
    ────────────────────────────────────── */
-.category-section { margin-bottom: 1.8rem; }
-.category-title {
-  margin: 0 0 0.8rem; font-size: 1.1rem; font-weight: 700; color: var(--text);
-  text-align: center;
+.category-section {
+  margin-bottom: 1.8rem;
+  width: 100%;
 }
 
-/* Carousel – Mobile-first, smooth swipe */
+.category-title {
+  margin: 0 0 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: left;
+}
+
+/* CAROUSEL – safe, swipeable */
 .products-carousel {
   display: flex;
   gap: 0.75rem;
   overflow-x: auto;
   padding: 0.5rem 0;
   scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Hide scrollbar */
+  scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   touch-action: pan-x;
+  width: 100%;
+  box-sizing: border-box;
 
   &::-webkit-scrollbar { display: none; }
 }
 
-/* Card width – Mobile-first scaling */
+/* CARD: 1 full + ½ peek */
 .products-carousel .product-card {
-  flex: 0 0 calc(80vw - 2rem); /* 80% of screen, minus gap */
+  flex: 0 0 calc(100vw - 3rem - 80px); /* 1 full card + 80px peek */
   max-width: 260px;
-  scroll-snap-align: center;
   min-width: 140px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 /* ──────────────────────────────────────
-   RESPONSIVE BREAKPOINTS – Desktop up
+   8. RESPONSIVE – Scale up safely
    ────────────────────────────────────── */
 @media (min-width: 480px) {
-  .products-carousel .product-card { flex: 0 0 calc(70vw - 2rem); }
+  .products-carousel .product-card {
+    flex: 0 0 calc(100vw - 3rem - 100px); /* 1 + 100px peek */
+  }
 }
 @media (min-width: 640px) {
-  .header { flex-direction: row; justify-content: space-between; text-align: left; }
-  .user-info { flex-direction: row; }
-  .user-details .aqcha-balance { flex-direction: row; gap: 0.75rem; }
-  .products-carousel .product-card { flex: 0 0 calc(50vw - 2rem); }
+  .header { flex-wrap: nowrap; }
+  .user-info { gap: 1rem; }
+  .products-carousel .product-card {
+    flex: 0 0 calc(50vw - 2rem);
+  }
 }
 @media (min-width: 768px) {
   .shop-container { padding: 1rem; }
@@ -198,6 +264,6 @@ $danger:    #ef4444;
   .products-carousel .product-card { flex: 0 0 260px; }
 }
 @media (min-width: 1280px) {
-  .shop-container { max-width: 1400px; }
+  .shop-container { max-width: 1400px; padding: 1.5rem; }
   .products-carousel .product-card { flex: 0 0 280px; }
 }
