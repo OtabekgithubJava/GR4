@@ -1,235 +1,55 @@
-<div class="shop-container" [class.dark-theme]="isDarkMode">
-  <!-- Header -->
-  <header class="shop-header">
-    <div class="header-content">
-      <div class="brand-section">
-        <div class="brand">
-          <!-- <span class="brand-icon">🏪</span> -->
-          <div>
-            <h1 class="brand-name">Premium Do'kon</h1>
-            <p class="brand-tagline">Sifatli o'quv materiallari</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div class="search-section">
-        <div class="search-container">
-          <input 
-            type="text" 
-            placeholder="Mahsulot qidirish..." 
-            class="search-input"
-            (input)="onSearch($event)">
-          <button class="search-btn">🔍</button>
-        </div>
-      </div> -->
-
-      <div class="user-section">
-        <div class="user-info">
-          <div class="user-avatar">
-            <img [src]="currentStudent?.image" alt="User">
-            <div class="online-indicator"></div>
-          </div>
-          <div class="user-details">
-            <span class="user-name">{{currentStudent?.name}}</span>
-            <div class="user-stats">
-              <span class="aqcha">{{currentStudent?.aqcha || 0}} AQCHA</span>
-              <span class="level">Level {{getLevel()}}</span>
-            </div>
-          </div>
+<div class="shop-container dark-theme">
+  <!-- Header (unchanged) -->
+  <div class="header">
+    <div class="user-info">
+      <img [src]="currentStudent?.image || 'assets/default-avatar.jpg'" alt="User" class="avatar">
+      <div class="user-details">
+        <span class="name">{{currentStudent?.name || 'Student'}}</span>
+        <div class="aqcha-balance">
+          <span class="aqcha">{{currentStudent?.aqcha || 0}} AQCHA</span>
+          <span class="level">Level {{getLevel()}}</span>
         </div>
       </div>
     </div>
+    <h5>*hozircha mahsulotlar misol uchun holos</h5>
+    <button class="theme-btn" (click)="toggleTheme()">
+      {{ isDarkMode ? '☀️' : '🌝' }}
+    </button>
+  </div>
 
-    <!-- Navigation -->
-    <nav class="category-nav">
-      <button 
-        class="category-btn" 
-        [class.active]="activeCategory === 'all'"
-        (click)="activeCategory = 'all'">
-        <span>📦 Barchasi</span>
-        <span class="count">{{products.length}}</span>
-      </button>
-      <button 
-        class="category-btn" 
-        [class.active]="activeCategory === 'books'"
-        (click)="activeCategory = 'books'">
-        <span>📚 Kitoblar</span>
-        <span class="count">{{getCategoryCount('books')}}</span>
-      </button>
-      <button 
-        class="category-btn" 
-        [class.active]="activeCategory === 'tools'"
-        (click)="activeCategory = 'tools'">
-        <span>🛠️ Asboblar</span>
-        <span class="count">{{getCategoryCount('tools')}}</span>
-      </button>
-      <button 
-        class="category-btn" 
-        [class.active]="activeCategory === 'premium'"
-        (click)="activeCategory = 'premium'">
-        <span>⭐ Premium</span>
-        <span class="count">{{getCategoryCount('premium')}}</span>
-      </button>
-    </nav>
-  </header>
-
-  <!-- Main Content -->
-  <main class="shop-main">
-    <!-- Stats Overview -->
-    <section class="stats-section">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <img src="aqcha.png" alt="AQCHA" class="stat-icon">
-          <div class="stat-info">
-            <span class="stat-value">{{getTotalSpent()}} AQCHA</span>
-            <span class="stat-label">Jami sarflangan</span>
-          </div>
+  <!-- ==================== CATEGORY SECTIONS WITH CAROUSELS ==================== -->
+  <div class="category-section" *ngFor="let cat of categories; let i = index">
+    <h3 class="category-title">{{cat.name}}</h3>
+    <div class="products-carousel">
+      <div class="product-card" *ngFor="let product of getProductsByCategory(cat.id)">
+        <div class="product-image">
+          <img [src]="product.image" [alt]="product.name" (error)="handleImageError($event, product)">
+          <span class="rarity-badge" [class]="product.rarity">
+            {{getRarityText(product.rarity)}}
+          </span>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon">🛍️</div>
-          <div class="stat-info">
-            <span class="stat-value">{{getItemsBought()}}</span>
-            <span class="stat-label">Sotib olingan</span>
+        <div class="product-info">
+          <h3 class="product-name">{{product.name}}</h3>
+          <p class="product-desc">{{product.description}}</p>
+          <div class="product-meta">
+            <span class="price">{{product.price}} AQCHA</span>
+            <span class="xp" *ngIf="product.xpBonus">+{{product.xpBonus}} XP</span>
           </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">🏅</div>
-          <div class="stat-info">
-            <span class="stat-value">#{{getPlayerRank()}}</span>
-            <span class="stat-label">Reyting</span>
-          </div>
+          <button
+            class="buy-btn"
+            [class.can-buy]="canAfford(product)"
+            [class.cannot-buy]="!canAfford(product)"
+            (click)="buyProduct(product)"
+            [disabled]="!canAfford(product)">
+            {{ canAfford(product) ? 'BUY NOW' : 'NEED MORE AQCHA' }}
+          </button>
         </div>
       </div>
-    </section>
-
-    <!-- Products Section -->
-    <section class="products-section">
-      <div class="section-header">
-        <h2 class="section-title">Mahsulotlar</h2>
-        <div class="section-controls">
-          <div class="sort-controls">
-            <button 
-              class="sort-btn" 
-              [class.active]="sortBy === 'name'"
-              (click)="sortProducts('name')">
-              Alfabet
-            </button>
-            <button 
-              class="sort-btn" 
-              [class.active]="sortBy === 'price'"
-              (click)="sortProducts('price')">
-              Narx
-            </button>
-          </div>
-          <div class="view-toggle">
-            <button 
-              class="view-btn" 
-              [class.active]="viewMode === 'grid'"
-              (click)="viewMode = 'grid'">
-              ◼️
-            </button>
-            <button 
-              class="view-btn" 
-              [class.active]="viewMode === 'list'"
-              (click)="viewMode = 'list'">
-              ☰
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Products Grid -->
-      <div class="products-grid" [class.list-view]="viewMode === 'list'">
-        <div 
-          class="product-card" 
-          *ngFor="let product of getFilteredProducts()"
-          [class.can-afford]="canAfford(product)"
-          [class.featured]="product.featured">
-          
-          <!-- Product Image -->
-          <div class="product-image">
-            <img 
-              [src]="product.image" 
-              [alt]="product.name"
-              (error)="handleImageError($event, product)">
-            <div class="product-badges">
-              <span class="badge rarity" [class]="product.rarity">
-                {{getRarityText(product.rarity)}}
-              </span>
-              <span class="badge featured" *ngIf="product.featured">⭐</span>
-              <span class="badge discount" *ngIf="product.originalPrice">
-                -{{calculateDiscount(product)}}%
-              </span>
-            </div>
-          </div>
-
-          <!-- Product Info -->
-          <div class="product-info">
-            <div class="product-header">
-              <h3 class="product-name">{{product.name}}</h3>
-              <span class="product-category">{{product.category}}</span>
-            </div>
-            
-            <p class="product-description">{{product.description}}</p>
-            
-            <div class="product-meta">
-              <div class="meta-item" *ngIf="product.rating">
-                <span>⭐ {{product.rating}}</span>
-                <span>({{product.reviewCount}})</span>
-              </div>
-              <div class="meta-item" *ngIf="product.xpBonus">
-                <span>+{{product.xpBonus}} XP</span>
-              </div>
-            </div>
-
-            <!-- Price and Action -->
-            <div class="product-footer">
-              <div class="price">
-                <span class="current-price">
-                  <img src="aqcha.png" alt="AQCHA" class="currency-icon">
-                  {{product.price}}
-                </span>
-                <span class="original-price" *ngIf="product.originalPrice">
-                  {{product.originalPrice}}
-                </span>
-              </div>
-              
-              <button 
-                class="buy-btn" 
-                (click)="buyProduct(product)"
-                [disabled]="!canAfford(product)"
-                [class.affordable]="canAfford(product)">
-                {{canAfford(product) ? 'Sotib olish' : 'Aqcha yetarli emas'}}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Empty State -->
-      <div class="empty-state" *ngIf="getFilteredProducts().length === 0">
-        <div class="empty-icon">📦</div>
-        <h3>Mahsulot topilmadi</h3>
-        <p>Qidiruv shartlaringizga mos mahsulot topilmadi</p>
-        <button class="clear-filters" (click)="clearFilters()">
-          Filtrlarni tozalash
-        </button>
-      </div>
-    </section>
-  </main>
-
-  <!-- Toast Notifications -->
-  <div class="toast-container">
-    <div 
-      class="toast" 
-      *ngFor="let toast of toasts" 
-      [class]="toast.type">
-      <span class="toast-icon">{{getToastIcon(toast.type)}}</span>
-      <div class="toast-content">
-        <strong>{{toast.title}}</strong>
-        <p>{{toast.message}}</p>
-      </div>
-      <button class="toast-close" (click)="removeToast(toast.id)">×</button>
     </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" *ngIf="toasts.length > 0" [class]="toasts[0].type">
+    {{toasts[0].message}}
   </div>
 </div>
