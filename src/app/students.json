@@ -20,7 +20,7 @@
     "level": "OK",
     "months": {
       "2025-10": { "davomat": 90, "uy_vazifa": 20, "tasks": 387, "jarima": 300 },
-      "2025-11": { "davomat": 30, "uy_vazifa": 20, "tasks": 0, "jarima": 10 }
+      "2025-11": { "davomat": 30, "uy_vazifa": 20, "tasks": 5, "jarima": 10 }
     }
   },
   {
@@ -68,7 +68,7 @@
     "level": "OK",
     "months": {
       "2025-10": { "davomat": 100, "uy_vazifa": 30, "tasks": 581, "jarima": 250 },
-      "2025-11": { "davomat": 30, "uy_vazifa": 20, "tasks": 100, "jarima": 110 }
+      "2025-11": { "davomat": 30, "uy_vazifa": 20, "tasks": 110, "jarima": 110 }
     }
   },
   {
