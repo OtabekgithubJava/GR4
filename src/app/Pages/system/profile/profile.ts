@@ -56,7 +56,6 @@ export class Profile implements OnInit {
     { name: 'Legend 3', xp: 500, image: 'Legend3.png' },
     { name: 'Legend 2', xp: 750, image: 'Legend2.png' },
     { name: 'Legend 1', xp: 1000, image: 'Legend1.png' }
-
   ];
 
   // Oylik ma'lumotlar (darslar soni va uy vazifa berilgan darslar soni)
