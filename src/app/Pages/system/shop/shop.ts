@@ -46,53 +46,28 @@ export class Shop implements OnInit {
 
   private initializeData() {
     this.products = [
-      { id: 1, name: "Algebra Mastery Workbook", price: 18, description: "300+ practice problems with step-by-step solutions.", image: 'assets/images/products/algebra.jpg', category: 'books', rarity: 'rare', xpBonus: 90 },
-      { id: 2, name: "World History Encyclopedia", price: 32, description: "From ancient Rome to modern revolutions.", image: 'assets/images/products/history.jpg', category: 'books', rarity: 'epic', xpBonus: 140 },
-      { id: 3, name: "English Vocabulary Builder", price: 14, description: "5000+ words, quizzes, and flashcards.", image: 'assets/images/products/vocab.jpg', category: 'books', rarity: 'common', xpBonus: 40 },
-      { id: 4, name: "Physics for High School", price: 25, description: "Mechanics, electricity, and waves explained.", image: 'assets/images/products/physics.jpg', category: 'books', rarity: 'rare', xpBonus: 100 },
-      { id: 5, name: "Creative Writing Guide", price: 16, description: "Story structure, dialogue, and editing tips.", image: 'assets/images/products/writing.jpg', category: 'books', rarity: 'common', xpBonus: 50 },
-      { id: 6, name: "Biology Lab Manual", price: 28, description: "30+ experiments with full diagrams.", image: 'assets/images/products/biology.jpg', category: 'books', rarity: 'epic', xpBonus: 120 },
-      { id: 7, name: "SAT Prep Book", price: 30, description: "Practice tests + strategies for top scores.", image: 'assets/images/products/sat.jpg', category: 'books', rarity: 'epic', xpBonus: 130 },
+      { id: 1, name: "Essentials Kitoblar", price: 10, description: "Eng kerakli so‘zlar to‘plami (1-4)", image: 'https://www.ieltsbid.in/wp-content/uploads/2020/05/4000essential-english-words.jpg', category: 'books', rarity: 'rare', xpBonus: 1110 },
+      { id: 2, name: "The 10X Rule", price: 15, description: "Dunyo qarashni kengaytiruvchi kitob", image: 'https://avatars.mds.yandex.net/i?id=69f3a31fcc45c04ee2ebaa60af50ca736bd1cbf4-4518919-images-thumbs&n=13', category: 'books', rarity: 'epic', xpBonus: 1665 },
+      { id: 3, name: "Launch Kitobi", price: 15, description: "Biznesga qiziquvchilar uchun", image: 'https://m.media-amazon.com/images/I/41VbkFTsocL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C41VbkFTsocL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255.jpg', category: 'books', rarity: 'epic', xpBonus: 1665 },
 
-      { id: 8, name: "Gel Ink Pen Set (12 colors)", price: 10, description: "Smooth, quick-dry, ergonomic grip.", image: 'assets/images/products/gelpen.jpg', category: 'stationery', rarity: 'common' },
-      { id: 9, name: "A4 Spiral Notebook", price: 13, description: "200 pages, college-ruled, durable cover.", image: 'assets/images/products/notebook.jpg', category: 'stationery', rarity: 'rare', xpBonus: 35 },
-      { id: 10, name: "Neon Highlighters (6-pack)", price: 8, description: "Chisel tip, smear-resistant.", image: 'assets/images/products/highlighter.jpg', category: 'stationery', rarity: 'common' },
-      { id: 11, name: "Mechanical Pencil Set (0.5/0.7mm)", price: 9, description: "With refill leads and erasers.", image: 'assets/images/products/mechanical.jpg', category: 'stationery', rarity: 'common' },
-      { id: 12, name: "Sticky Notes Cube (400 sheets)", price: 7, description: "Bright colors, strong adhesive.", image: 'assets/images/products/stickynotes.jpg', category: 'stationery', rarity: 'common' },
-      { id: 13, name: "Whiteboard Marker Set", price: 11, description: "Low-odor, chisel tip, 8 colors.", image: 'assets/images/products/whiteboard.jpg', category: 'stationery', rarity: 'rare' },
-      { id: 14, name: "Index Cards (500 pack)", price: 6, description: "Ruled, perfect for flashcards.", image: 'assets/images/products/indexcards.jpg', category: 'stationery', rarity: 'common' },
+      
+      { id: 4, name: "Bo'yoqlar to'plami", price: 2, description: "Maxsus belgilash uchun qulay", image: 'https://t3.ftcdn.net/jpg/04/44/67/92/360_F_444679211_LXlT3DyAcPnj73B1Te8nPkFh3M8ZSZp0.jpg', category: 'stationery', rarity: 'common', xpBonus: 222 },
+      { id: 5, name: "Flashkartalar", price: 3, description: "Tez yodlash uchun ideal", image: 'https://clipart-library.com/8300/2368/color-paper-clipart-xl.png', category: 'stationery', rarity: 'common', xpBonus: 333 },
+      { id: 6, name: "Maxsus 20ta Daftar", price: 20, description: "1 yillik maktab o'quv yili uchun ideal", image: 'https://i.pinimg.com/originals/b8/09/a0/b809a0e86a63c6a14103aae58f027921.jpg', category: 'stationery', rarity: 'rare', xpBonus: 2220 },
+      { id: 7, name: "100 ta Ruchkalar", price: 10, description: "Yillab yetadigan ruchkalar to'plami", image: 'https://i.pinimg.com/originals/b2/ab/59/b2ab59c0eb3572f140e0738dc483c963.jpg', category: 'stationery', rarity: 'rare', xpBonus: 1110 },
+    
 
-      { id: 15, name: "Scientific Calculator FX-991", price: 29, description: "400+ functions, natural display.", image: 'assets/images/products/calculator.jpg', category: 'devices', rarity: 'epic', xpBonus: 110 },
-      { id: 16, name: "Wireless Bluetooth Mouse", price: 22, description: "Ergonomic, 1600 DPI, silent click.", image: 'assets/images/products/mouse.jpg', category: 'devices', rarity: 'rare', xpBonus: 60 },
-      { id: 17, name: "USB-C Hub 7-in-1", price: 35, description: "HDMI, SD, USB 3.0, PD charging.", image: 'assets/images/products/hub.jpg', category: 'devices', rarity: 'epic', xpBonus: 100 },
-      { id: 18, name: "Portable Power Bank 20000mAh", price: 38, description: "Fast charge, dual USB output.", image: 'assets/images/products/powerbank.jpg', category: 'devices', rarity: 'rare', xpBonus: 80 },
-      { id: 19, name: "Webcam HD 1080p", price: 45, description: "Auto-focus, built-in mic.", image: 'assets/images/products/webcam.jpg', category: 'devices', rarity: 'epic', xpBonus: 130 },
-      { id: 20, name: "Laptop Stand (Aluminum)", price: 30, description: "Adjustable height, cooling vents.", image: 'assets/images/products/stand.jpg', category: 'devices', rarity: 'rare', xpBonus: 70 },
-      { id: 21, name: "Noise-Cancelling Headphones", price: 65, description: "Over-ear, 30h battery, ANC.", image: 'assets/images/products/headphones.jpg', category: 'devices', rarity: 'legendary', xpBonus: 200, streakBonus: 2 },
+      { id: 8, name: "Telefon Holder", price: 15, description: "Telefonni qulay ushlab turadi", image: 'https://avatars.mds.yandex.net/i?id=8c121610007e8c62a09aa7247aa96846afad80ce-5569949-images-thumbs&n=13', category: 'devices', rarity: 'common', xpBonus: 1665 },
+      { id: 9, name: "Noutbuk Holder", price: 25, description: "Noutbuk uchun ergonomik tayanch", image: 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/5a6f1615-1589-48f2-a884-6bc1cde804ae.__CR0,0,1464,600_PT0_SX1464_V1___.jpg', category: 'devices', rarity: 'rare', xpBonus: 2775 },
+      { id: 10, name: "Aqlli Lampa", price: 15, description: "O‘qish uchun maxsus yoritgich", image: 'assets/images/products/smartlamp.jpg', category: 'devices', rarity: 'epic', xpBonus: 1665 },
+      { id: 11, name: "Telefon G'ilofi", price: 7, description: "Telefonni himoyalovchi Apple dizaynidagi g'ilof", image: 'https://avatars.mds.yandex.net/i?id=c0d33515a8bc7bba76049d3f8076ae0edbd3ba2d-4387831-images-thumbs&n=13', category: 'devices', rarity: 'common', xpBonus: 777 },
+      { id: 12, name: "Premium USB", price: 8, description: "Tezkor va ishonchli xotira", image: 'https://avatars.mds.yandex.net/i?id=c0c285c96b526c82dffc7d4191b18ab6c475ef63-10330973-images-thumbs&n=13', category: 'devices', rarity: 'rare', xpBonus: 888 },
+      { id: 13, name: "67W Zaryadlovchi", price: 9, description: "Juda tez quvvat beruvchi model", image: 'https://trendcase.ru/wa-data/public/site/photo/native-union-int-gan-charger-67-1.jpg', category: 'devices', rarity: 'epic', xpBonus: 999 },
 
-      { id: 22, name: "Smart LED Desk Lamp", price: 48, description: "Touch control, wireless charging base.", image: 'assets/images/products/lamp.jpg', category: 'premium', rarity: 'legendary', xpBonus: 180, streakBonus: 2 },
-      { id: 23, name: "Leather Academic Planner", price: 40, description: "Custom name embossed, weekly layout.", image: 'assets/images/products/planner.jpg', category: 'premium', rarity: 'epic', xpBonus: 130 },
-      { id: 24, name: "Hydration Tracking Bottle", price: 33, description: "App sync, LED reminder, 750ml.", image: 'assets/images/products/bottle.jpg', category: 'premium', rarity: 'rare', xpBonus: 80 },
-      { id: 25, name: "Ergonomic Chair Cushion", price: 42, description: "Memory foam, breathable mesh.", image: 'assets/images/products/cushion.jpg', category: 'premium', rarity: 'rare', xpBonus: 90 },
-      { id: 26, name: "Digital Notebook (Rocketbook)", price: 35, description: "Reusable, cloud sync via app.", image: 'assets/images/products/rocketbook.jpg', category: 'premium', rarity: 'epic', xpBonus: 140 },
-      { id: 27, name: "Personalized Metal Pen", price: 28, description: "Engraved name, premium ink.", image: 'assets/images/products/metalpen.jpg', category: 'premium', rarity: 'rare', xpBonus: 70 },
-      { id: 28, name: "Smart Plant Watering Sensor", price: 55, description: "App alerts, soil moisture monitor.", image: 'assets/images/products/plant.jpg', category: 'premium', rarity: 'legendary', xpBonus: 160 },
 
-      { id: 29, name: "Acrylic Paint Set (24 colors)", price: 25, description: "Non-toxic, vibrant, fast-dry.", image: 'assets/images/products/paint.jpg', category: 'art', rarity: 'rare', xpBonus: 70 },
-      { id: 30, name: "Professional Sketch Pencils", price: 12, description: "12 grades from 6H to 8B.", image: 'assets/images/products/pencils.jpg', category: 'art', rarity: 'common' },
-      { id: 31, name: "Canvas Panel Pack (5 pcs)", price: 19, description: "30×40 cm, pre-primed.", image: 'assets/images/products/canvas.jpg', category: 'art', rarity: 'rare' },
-      { id: 32, name: "Watercolor Brush Set", price: 15, description: "Synthetic bristles, 10 sizes.", image: 'assets/images/products/brushes.jpg', category: 'art', rarity: 'common' },
-      { id: 33, name: "Drawing Tablet (Beginner)", price: 50, description: "8x5 in, 8192 pressure levels.", image: 'assets/images/products/tablet.jpg', category: 'art', rarity: 'epic', xpBonus: 150 },
-      { id: 34, name: "Charcoal Sketching Kit", price: 18, description: "Pencils, sticks, eraser, sharpener.", image: 'assets/images/products/charcoal.jpg', category: 'art', rarity: 'rare' },
-      { id: 35, name: "Oil Pastel Set (36 colors)", price: 20, description: "Blendable, rich pigments.", image: 'assets/images/products/pastel.jpg', category: 'art', rarity: 'rare', xpBonus: 60 },
-
-      { id: 36, name: "World Map Jigsaw Puzzle", price: 16, description: "500 pieces, educational & fun.", image: 'assets/images/products/puzzle.jpg', category: 'games', rarity: 'common', xpBonus: 40 },
-      { id: 37, name: "Logic Brain Teaser Set", price: 28, description: "100 challenges, portable case.", image: 'assets/images/products/logic.jpg', category: 'games', rarity: 'epic', xpBonus: 95 },
-      { id: 38, name: "Rubik’s Cube 3x3", price: 12, description: "Official competition grade.", image: 'assets/images/products/rubik.jpg', category: 'games', rarity: 'common' },
-      { id: 39, name: "Chess & Checkers Set", price: 22, description: "Wooden board, magnetic pieces.", image: 'assets/images/products/chess.jpg', category: 'games', rarity: 'rare', xpBonus: 50 },
-      { id: 40, name: "Memory Card Game", price: 10, description: "50 pairs, improves focus.", image: 'assets/images/products/memory.jpg', category: 'games', rarity: 'common' },
-      { id: 41, name: "Sudoku Master Book", price: 14, description: "1000 puzzles, 5 difficulty levels.", image: 'assets/images/products/sudoku.jpg', category: 'games', rarity: 'common', xpBonus: 30 },
-      { id: 42, name: "Tangram Puzzle Set", price: 18, description: "7 pieces, 100+ shapes to build.", image: 'assets/images/products/tangram.jpg', category: 'games', rarity: 'rare', xpBonus: 55 }
+      { id: 114, name: "Mr Otabek O'qish Rejasi", price: 50, description: "Yaxshiroq natijaga chiqish uchun kerak bo'ladigan o'qish tizimi", image: 'https://cdn.freelance.ru/images/att/5448962_900_600.png', category: 'premium', rarity: 'legendary', xpBonus: 5550 },
+      { id: 115, name: "Najot Ta'lim Kursi", price: 30, description: "Najot Ta'lim kursidan to'plangan materiallar", image: 'https://cdn-edge.kwork.ru/files/portfolio/t3/82/9805a909d8472b79b39dc27996f03711e4c4ab61-1720559637.jpg', category: 'premium', rarity: 'legendary', xpBonus: 3330 },
+      { id: 116, name: "Premium DLS Akkaunt", price: 15, description: "Reklamalarsiz, 2019-yil ochilgan legendarniy accounti (1 oy)", image: 'https://i.pinimg.com/originals/c4/35/dd/c435dda326e97ab8295da161ffc9c067.jpg', category: 'premium', rarity: 'legendary', xpBonus: 1665 },
     ];
   }
 
@@ -125,12 +100,11 @@ export class Shop implements OnInit {
 
   private updateCategories() {
     this.categories = [
-      { id: 'books', name: 'Books' },
-      { id: 'stationery', name: 'Stationery' },
-      { id: 'devices', name: 'Devices' },
+      { id: 'books', name: 'Kitoblar' },
+      { id: 'stationery', name: 'O\'quv qurollari' },
+      { id: 'devices', name: 'Qurilmalar' },
       { id: 'premium', name: 'Premium' },
-      { id: 'art', name: 'Art Supplies' },
-      { id: 'games', name: 'Games & Puzzles' }
+      { id: 'art', name: 'Hali davomi bor...' },
     ];
   }
 
