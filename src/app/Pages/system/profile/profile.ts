@@ -62,7 +62,7 @@ export class Profile implements OnInit {
   monthDetails: { [key: string]: { totalLessons: number, homeworkLessons: number } } = {
     "2025-10": { totalLessons: 10, homeworkLessons: 10 },
     "2025-11": { totalLessons: 13, homeworkLessons: 13 },
-    "2025-12": { totalLessons: 5, homeworkLessons: 5 }
+    "2025-12": { totalLessons: 6, homeworkLessons: 6 }
   };
 
   currentMonth = '2025-12'; // Joriy oy
