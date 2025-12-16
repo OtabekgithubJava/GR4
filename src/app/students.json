@@ -35,7 +35,7 @@
     "months": {
       "2025-10": { "davomat": 100, "uy_vazifa": 40, "tasks": 431, "jarima": 250 },
       "2025-11": { "davomat": 130, "uy_vazifa": 80, "tasks": 230, "jarima": 270 },
-      "2025-12": { "davomat": 70, "uy_vazifa": 60, "tasks": 630, "jarima": 0 }
+      "2025-12": { "davomat": 70, "uy_vazifa": 60, "tasks": 630, "jarima": 100 }
     }
   },
   {
