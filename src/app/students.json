@@ -9,7 +9,7 @@
     "months": {
       "2025-10": { "davomat": 60, "uy_vazifa": 0, "tasks": 145, "jarima": 310 },
       "2025-11": { "davomat": 90, "uy_vazifa": 50, "tasks": 300, "jarima": 200 },
-      "2025-12": { "davomat": 40, "uy_vazifa": 30, "tasks": 20, "jarima": 1040 }
+      "2025-12": { "davomat": 40, "uy_vazifa": 30, "tasks": 70, "jarima": 1040 }
     }
   },
   {
@@ -35,7 +35,7 @@
     "months": {
       "2025-10": { "davomat": 100, "uy_vazifa": 40, "tasks": 431, "jarima": 250 },
       "2025-11": { "davomat": 130, "uy_vazifa": 80, "tasks": 230, "jarima": 270 },
-      "2025-12": { "davomat": 70, "uy_vazifa": 60, "tasks": 530, "jarima": 0 }
+      "2025-12": { "davomat": 70, "uy_vazifa": 60, "tasks": 580, "jarima": 0 }
     }
   },
   {
